@@ -17,7 +17,7 @@
 
     3-1. 클래스를 활용
         class Node:
-            def _init_(self, next=None):
+            def __init__(self, next=None):
                 self.data = data
                 self.next = next
 
@@ -30,10 +30,10 @@
           head는 첫번째 노드를 저장(시작점)
 
 
-    3.2. 링크드 리스트 데이터 추가 및 출력
+    3-2. 링크드 리스트 데이터 추가 및 출력
 
     class Node:
-        def _init_(self,data, next=None):
+        def __init__(self,data, next=None):
             self.data = data
             self.next = next
 
@@ -54,13 +54,70 @@
     * 2 ~ 9까지 add
 
     ----------------출력----------------
-
+ㅑ
     node = head
     while node.next:
         print(node.data)
         node = node.next
     print (node.data)
 
+    1
+    2
+    3
+    4
+    5
+    .
+    .
+    .
+
+    * node에 next(pinter)가 있으면 현재 노드를 출력하고
+      다음 노드주소를 넘겨준다. 만약 포인터 정보가 없으면 현재 노드를 출력하고 종료
+      파이썬에서 __init__ 은 자바에서 생성자와 비슷
+
+    3-3. 중간 노드 데이터 변경 하기
+
+    node3 = Node(1.5)
+    ----------------------------
+    node = head
+    search = True
+    while search:
+        if node.data == 1:
+            search = False
+        else:
+            node = node.next
+    pre_node_next = node.next
+    node.next     = node3
+    node3.next     = node_next
+
+    * search를 이용해 새 노드의 이전 노드를 찾고
+      새로 들어갈 노드의 포인터 이전 노드에서 가져온
+       다음 노드의 포인터 주소를 저장
 
 
+
+    3-4. 노드의 삭제하기
+
+        1. head 삭제
+        2. 마지막 노드 삭제
+        3. 중간 노드 삭제
+
+
+        def delete(self, data):
+            if self.hrad == "";
+                print("해당 값을 가진 노드가 없습니다.")
+                return
+
+            if(self.head.data == data):  <- 1번 케이스
+                temp = self.head
+                self.head = self.head.next
+                del temp
+            else:                        <- 2,3번 케이스
+                node = self.head
+                while node.next:
+                    if node.next.data == data:     <- del target Node true
+                        temp = node.next
+                        node.next = node.next.next <- del target Node Next Pointer
+                        del temp
+                    else:                          <- del target Node False
+                        node = node.next
 
