@@ -121,3 +121,44 @@
                     else:                          <- del target Node False
                         node = node.next
 
+    3-5. 더블(double) 링크드 리스트
+
+        이전 노드 포인터/ 노드 데이터 / 다음 노드 포인터
+        기존과 다르게 3공간으로 활용
+
+        class Node:
+            def __init__(self, data, prev=None, next=None):
+                self.prev = prev       * 이전 노드 포인터
+                self.data = data
+                self.next = next       * 다음 노드 포인터
+
+        class NodeMgmt:
+            def __init__(self,data):
+                self.head = Node(data)   * 리스트 시작 노드
+                self.tail = self.head    * 리스트 끝 노드
+
+            def insert(self, data):
+                if self.head == None:
+                    self.head = Node(data)
+                    self.tail = self.head
+                else:
+                    node = self.head
+                    while node.next:
+                        node = node.next
+                    newNode = Node(data)
+                    node.next = newNode
+                    newNode.prev = node
+                    self.tail = newNode
+
+            def desc(self):
+                node = self.head
+                while node:
+                    print(node.data)
+                    node = node.next
+
+        -----------------------출력-----------------------
+
+            double_linked_list = NodeMgmt(0)
+            for index in range(1,10):
+                double_linked_list.insert(index)
+            double_linked_list.desc()
