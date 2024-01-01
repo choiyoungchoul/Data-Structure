@@ -85,3 +85,34 @@
         1) Chaining(체이닝) 기법 -> open Hashing 기법중 하나로 해쉬 테이블 저장 공간 외 공간을 사용하는 방법 ex) 링크드 리스트 결합
 
 
+        hash_table = list([0 for i in range(8)])        * 리스트에 동일하게 초기값 0을 셋팅
+
+        def get_key(data):
+            return hash(data)
+
+        def hash_function(key):
+            return key % 8
+
+        def save_data(data, value):
+            index_key = get_key(data)
+            hash_address = hash_function(index_key)
+            if hash_table[hash_address] != 0:                          * 초기값 0이 아니다 라는건 이미 배정된 값이 있다는 의미. -> 주소 리스트 공간이 1이상
+                for index in range(len(hash_table[hash_address])):       * 해당 address에 저장된 공간만큼 반복문 반복
+                    if hash_table[hash_address][index][0] == index_key:     * key가 일치하면 해당 공간에 값 저장 -> 공간을 2개로 만들어 하나는(0번엔) key값
+                        hash_table[hash_address][index][1] = value          * 하나는(1번엔) value값 저장 (덮어씌우기)
+                        return
+                    hash_table[hash_address].append([index_key, value])      * 만약 key값이 일치하지 않으면 새로운 key와 value를 이어서 append -> 링크드리스트 처럼 이어서 구현
+            else:
+                hash_table[hash_address] = [[index_key, value]]          * 초기값이 0이면 해당 인덱스 주소로 값 저장 -> 초기값이니 리스트 저장된 공간은 최초이므로 append를 안하고 그냥 LIST로 할당
+
+        def read_data(data):
+            index_key = get_key(data)
+            hash_address = hash_function(index_key)
+
+            if hash_table[hash_address] != 0:                           * 0이 아니면 데이터가 저장이 되어 있기 때문에 진입
+                for index in range(len(hash_table[hash_address])):
+                    if hash_table[hash_address][index][0] == index_key: * index의 0번엔 key 값 1번엔 value가 저장되어 있기 때문에 return value인 idnex의 1번 공간을 return
+                        return hash_table[hash_address][index][1]
+                return None
+            else:                                                       * 0이면 해당 데이터가 존재하지 않으므로 None을 return
+                return None
