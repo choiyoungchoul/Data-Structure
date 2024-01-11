@@ -26,6 +26,35 @@
 
   3-1. 이진 탐색트리 (링크드 리스트로 구현)
 
+    * Node 클래스 선언
+    class NoneMgmt:
 
+      * 생성자 클래스
+      def __init__(self,value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+      * 노드 생성 클래스
+      def insert(self,value):
+        self.current_node = self.head                     * 첫번째 노드
+        while True:
+          if value < self.current_node.value:             * 왼쪽(left)으로 가야하는 노드
+            if self.current_node.left != None:
+              self.current_node = self.current_node.left  * 브랜이가 있다면 level1 의 브랜치 방향 설정(현재 노드로 설정 : 비교할 대상 변경)
+            else:
+              self.current_node.left = Node(value)        * 만약 왼쪽 노드가 비었다면 새로생성!
+              break
+          else:                                           * 크거나 같다면 오른쪽(Right) 가야하는 노드
+            if self.current_node.right != None:
+              self.current_node = self.current_node.right
+            else:
+              self.current_node.right = Node(value)
+              break
+
+      * 코드 테스트
+        head = Node(1)
+        BST = NoneMgmt(head)
+        BST.insert(2)
 
 
