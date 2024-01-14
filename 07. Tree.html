@@ -27,7 +27,7 @@
   3-1. 이진 탐색트리 (링크드 리스트로 구현)
 
     * Node 클래스 선언
-    class NoneMgmt:
+    class NodeMgmt:
 
       * 생성자 클래스
       def __init__(self,value):
@@ -52,9 +52,31 @@
               self.current_node.right = Node(value)
               break
 
+      * 노드가 실제로 있는 지, 유무확인 함수
+      def search(self,value):
+        self.current_node = self.head
+        while self.current_node:
+          if self.current_node.value = value:              * 노드를 순회하면서 내가 찾는 값이 맞다면 True
+            return True
+          elif value < self.current_node.value:            * 값이 현재 노드보다 작다면 (왼쪽에 있다면)
+            self.current_node = self.current_node.left     * 역시 왼쪽기준으로 가야하기 때문에 현재 노드를 왼쪽으로 변경
+          else:
+            self.current_node = self.current_node.rigth    * 같거나, 작다면 오른쪽 노드로 기준변경!
+        return False
+
+
+
+
+
       * 코드 테스트
         head = Node(1)
-        BST = NoneMgmt(head)
+        BST = NodeMgmt(head)
         BST.insert(2)
+        BST.insert(3)
+        BST.insert(4)
+
+        BTS.search(2)   // true
+        BST.insert(3)   // true
+        BST.insert(5)   // false
 
 
